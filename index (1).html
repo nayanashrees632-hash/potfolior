@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B1F3A">
+  <meta name="description" content="Personal portfolio of Nayana Shree — BSc Computer Technology student exploring Generative AI and software development.">
+  <title>Nayana Shree | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0B1F3A;
+      --navy-2: #102b4d;
+      --navy-3: #16395f;
+      --blue: #4DA8DA;
+      --blue-light: #8bd0f4;
+      --snow: #F2F7FC;
+      --muted: #a9bdd1;
+      --line: rgba(139,208,244,.19);
+      --glass: rgba(18,47,79,.68);
+      --shadow: 0 24px 70px rgba(0,0,0,.24);
+      --radius: 22px;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0; color: var(--snow); background: var(--navy);
+      font-family: "Manrope", system-ui, sans-serif; line-height: 1.65;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(circle at 78% 13%, rgba(77,168,218,.14), transparent 28rem),
+        radial-gradient(circle at 12% 55%, rgba(77,168,218,.09), transparent 30rem),
+        linear-gradient(145deg, #091a31, #0B1F3A 52%, #0d2747);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--blue-light); outline-offset: 4px;
+    }
+    .container { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; color: var(--blue-light);
+      font: 500 .76rem "DM Mono", monospace; letter-spacing: .16em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--blue); }
+    .section { padding: 112px 0; position: relative; }
+    .section-heading { max-width: 680px; margin-bottom: 46px; }
+    h1,h2,h3,p { margin-top: 0; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.12; letter-spacing: -.045em; margin: 15px 0; }
+    .section-heading p, .muted { color: var(--muted); }
+    .accent { color: var(--blue-light); }
+    .nav-wrap {
+      position: fixed; inset: 0 0 auto; z-index: 100; transition: background .3s, border .3s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-wrap.scrolled { background: rgba(8,25,46,.86); backdrop-filter: blur(18px); border-color: var(--line); }
+    nav { height: 78px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-weight: 800; letter-spacing: -.04em; font-size: 1.1rem; }
+    .brand span { color: var(--blue); }
+    .nav-links { display: flex; align-items: center; gap: 27px; list-style: none; padding: 0; margin: 0; }
+    .nav-links a { color: #c3d2e1; font-size: .84rem; font-weight: 700; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue-light); }
+    .nav-cta, .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      border: 1px solid transparent; border-radius: 999px; padding: 13px 21px;
+      font-weight: 800; font-size: .86rem; cursor: pointer; transition: transform .22s, box-shadow .22s, background .22s;
+    }
+    .nav-cta, .btn-primary { background: var(--blue); color: #071a2e; box-shadow: 0 9px 28px rgba(77,168,218,.2); }
+    .btn:hover, .nav-cta:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(77,168,218,.25); }
+    .btn-secondary { border-color: rgba(139,208,244,.38); color: var(--snow); background: rgba(255,255,255,.025); }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: var(--glass); color: var(--snow); border-radius: 12px; width: 44px; height: 44px; font-size: 1.25rem; }
+    .hero { min-height: 100vh; display: grid; align-items: center; padding: 130px 0 78px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 55px; }
+    .availability { display: inline-flex; align-items: center; gap: 9px; padding: 8px 13px; border: 1px solid var(--line); background: rgba(255,255,255,.035); border-radius: 99px; color: #c6d8e8; font-size: .76rem; margin-bottom: 26px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #7de0b0; box-shadow: 0 0 12px #7de0b0; }
+    .hero h1 { font-size: clamp(3.2rem, 7vw, 6.4rem); line-height: .99; letter-spacing: -.075em; margin: 0 0 22px; }
+    .hero h1 .line { display: block; }
+    .hero h1 .outline { color: transparent; -webkit-text-stroke: 1px rgba(139,208,244,.78); }
+    .hero-copy { max-width: 600px; color: #b8c9d9; font-size: 1.03rem; margin-bottom: 30px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
+    .social-row { display: flex; gap: 12px; margin-top: 33px; }
+    .social-row a { display: grid; place-items: center; width: 39px; height: 39px; border: 1px solid var(--line); border-radius: 50%; color: var(--blue-light); font-size: .78rem; font-weight: 800; transition: .2s; }
+    .social-row a:hover { background: var(--blue); color: var(--navy); transform: translateY(-3px); }
+    .hero-art { position: relative; min-height: 450px; display: grid; place-items: center; }
+    .orbit { position: absolute; width: min(390px, 90%); aspect-ratio: 1; border: 1px solid rgba(77,168,218,.25); border-radius: 50%; animation: rotate 32s linear infinite; }
+    .orbit::before, .orbit::after { content: ""; position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 20px var(--blue); }
+    .orbit::before { top: 12%; left: 18%; } .orbit::after { bottom: 15%; right: 9%; }
+    .orbit.two { width: min(315px, 72%); border-style: dashed; animation-direction: reverse; animation-duration: 42s; }
+    @keyframes rotate { to { transform: rotate(360deg); } }
+    .profile-card {
+      width: min(310px, 76%); aspect-ratio: .82; border-radius: 34px; position: relative; overflow: hidden;
+      border: 1px solid rgba(139,208,244,.38); background:
+      linear-gradient(145deg, rgba(77,168,218,.24), rgba(11,31,58,.25)),
+      radial-gradient(circle at 50% 25%, rgba(139,208,244,.2), transparent 50%), #102b4d;
+      box-shadow: 0 30px 90px rgba(0,0,0,.35), 0 0 70px rgba(77,168,218,.12);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 25px;
+    }
+    .profile-card::before { content: "NS"; position: absolute; top: 32px; left: 0; right: 0; text-align: center; font-size: 8rem; font-weight: 800; letter-spacing: -.1em; color: rgba(139,208,244,.14); }
+    .profile-card::after { content: ""; position: absolute; width: 210px; height: 210px; border: 1px solid rgba(139,208,244,.28); border-radius: 50%; top: 60px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 0 22px rgba(139,208,244,.025), 0 0 0 45px rgba(139,208,244,.02); }
+    .profile-label { position: relative; z-index: 1; font: .72rem "DM Mono", monospace; color: var(--blue-light); letter-spacing: .12em; }
+    .profile-name { position: relative; z-index: 1; font-size: 1.55rem; font-weight: 800; line-height: 1.2; margin-top: 7px; }
+    .floating-chip { position: absolute; z-index: 2; border: 1px solid var(--line); background: rgba(12,35,62,.86); backdrop-filter: blur(12px); padding: 11px 15px; border-radius: 14px; color: #dceaf6; font-size: .76rem; box-shadow: var(--shadow); }
+    .chip-one { top: 17%; right: 0; } .chip-two { bottom: 15%; left: 0; }
+    .scroll-note { position: absolute; bottom: 27px; left: 50%; transform: translateX(-50%); color: #8ca7bf; font: .68rem "DM Mono", monospace; letter-spacing: .15em; text-transform: uppercase; }
+    .scroll-note::after { content: ""; display: block; width: 1px; height: 30px; background: linear-gradient(var(--blue), transparent); margin: 9px auto 0; }
+    .glass-card { background: linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018)); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .about-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 60px; align-items: center; }
+    .about-visual { min-height: 360px; border-radius: 28px; border: 1px solid var(--line); background: radial-gradient(circle at 50% 35%, rgba(77,168,218,.2), transparent 45%), linear-gradient(145deg,#15395f,#0b1f3a); display: grid; place-items: center; position: relative; overflow: hidden; }
+    .about-monogram { font-size: 8rem; font-weight: 800; letter-spacing: -.1em; color: rgba(139,208,244,.72); text-shadow: 0 0 55px rgba(77,168,218,.25); }
+    .about-stamp { position: absolute; bottom: 20px; right: 20px; font: .68rem "DM Mono", monospace; color: var(--blue-light); }
+    .about-text p { color: #b8c9d9; }
+    .info-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+    .pill { padding: 8px 12px; border: 1px solid var(--line); border-radius: 99px; color: #c9d9e7; font-size: .76rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .skill-card { padding: 23px; min-height: 180px; transition: transform .25s, border .25s, background .25s; }
+    .skill-card:hover { transform: translateY(-6px); border-color: rgba(77,168,218,.6); background: rgba(77,168,218,.08); }
+    .skill-icon { width: 43px; height: 43px; border-radius: 13px; display: grid; place-items: center; background: rgba(77,168,218,.14); color: var(--blue-light); font-size: 1.1rem; margin-bottom: 18px; }
+    .skill-card h3 { font-size: 1rem; margin-bottom: 9px; }
+    .skill-card p { font-size: .83rem; color: var(--muted); margin: 0; }
+    .tech-strip { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 23px; }
+    .tech { color: var(--blue-light); background: rgba(77,168,218,.08); border: 1px solid rgba(77,168,218,.2); border-radius: 8px; padding: 6px 10px; font: .7rem "DM Mono", monospace; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .project-card { overflow: hidden; transition: transform .25s, border .25s; }
+    .project-card:hover { transform: translateY(-7px); border-color: rgba(77,168,218,.6); }
+    .project-cover { min-height: 170px; display: grid; place-items: center; position: relative; overflow: hidden; background: linear-gradient(135deg,#153d66,#0c2340); }
+    .project-cover::before { content: ""; position: absolute; width: 190px; height: 190px; border: 1px solid rgba(139,208,244,.22); border-radius: 50%; box-shadow: 0 0 0 25px rgba(139,208,244,.035), 0 0 0 50px rgba(139,208,244,.025); }
+    .project-cover span { position: relative; font-size: 2.8rem; color: var(--blue-light); font-weight: 800; }
+    .project-body { padding: 22px; }
+    .project-body h3 { margin-bottom: 9px; font-size: 1.05rem; }
+    .project-body p { color: var(--muted); font-size: .83rem; min-height: 66px; }
+    .project-links { display: flex; gap: 15px; margin-top: 17px; }
+    .text-link { color: var(--blue-light); font-size: .77rem; font-weight: 800; }
+    .text-link.disabled { color: #718ba4; cursor: default; }
+    .timeline { position: relative; max-width: 850px; margin: 0 auto; }
+    .timeline::before { content: ""; position: absolute; left: 12px; top: 8px; bottom: 10px; width: 1px; background: linear-gradient(var(--blue), rgba(77,168,218,.08)); }
+    .timeline-item { position: relative; padding: 0 0 32px 48px; }
+    .timeline-item::before { content: ""; position: absolute; left: 6px; top: 7px; width: 13px; height: 13px; border-radius: 50%; background: var(--navy); border: 2px solid var(--blue); box-shadow: 0 0 15px rgba(77,168,218,.5); }
+    .timeline-card { padding: 24px; }
+    .timeline-date { font: .7rem "DM Mono", monospace; color: var(--blue-light); letter-spacing: .1em; }
+    .timeline-card h3 { margin: 8px 0 5px; font-size: 1.08rem; }
+    .timeline-card p { color: var(--muted); font-size: .85rem; margin: 0; }
+    .achievement-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .achievement { padding: 24px; }
+    .achievement .symbol { color: var(--blue-light); font-size: 1.5rem; }
+    .achievement h3 { font-size: .98rem; margin: 13px 0 6px; }
+    .achievement p { color: var(--muted); font-size: .8rem; margin: 0; }
+    .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 40px; align-items: start; }
+    .contact-details p { color: var(--muted); }
+    .contact-method { display: flex; align-items: center; gap: 13px; padding: 13px 0; border-bottom: 1px solid var(--line); color: #d6e4f0; font-size: .86rem; overflow-wrap: anywhere; }
+    .contact-method b { color: var(--blue-light); font-size: 1rem; width: 24px; }
+    .contact-form { padding: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    label { display: block; font-size: .76rem; color: #c8d8e7; font-weight: 700; margin-bottom: 7px; }
+    .field { margin-bottom: 16px; }
+    input, textarea { width: 100%; border: 1px solid rgba(139,208,244,.2); background: rgba(5,20,38,.42); border-radius: 11px; color: var(--snow); padding: 13px 14px; outline: none; transition: border .2s; }
+    input:focus, textarea:focus { border-color: var(--blue); }
+    textarea { min-height: 130px; resize: vertical; }
+    input::placeholder, textarea::placeholder { color: #708aa3; }
+    .form-note { color: #8da5ba; font-size: .72rem; margin: 12px 0 0; }
+    .form-status { color: var(--blue-light); font-size: .8rem; margin-top: 12px; min-height: 20px; }
+    footer { border-top: 1px solid var(--line); padding: 30px 0; background: rgba(3,15,29,.25); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: #91a9bf; font-size: .75rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 17px; }
+    .back-top { position: fixed; right: 25px; bottom: 25px; z-index: 50; width: 43px; height: 43px; border-radius: 50%; border: 1px solid var(--line); color: var(--blue-light); background: rgba(11,31,58,.9); cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(10px); transition: .25s; }
+    .back-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Chat assistant */
+    .chat-launcher { position: fixed; right: 25px; bottom: 83px; z-index: 120; border: 0; border-radius: 999px; background: var(--blue); color: #06182b; padding: 13px 18px; font-weight: 800; box-shadow: 0 12px 35px rgba(0,0,0,.35), 0 0 28px rgba(77,168,218,.25); cursor: pointer; transition: transform .2s; }
+    .chat-launcher:hover { transform: translateY(-3px); }
+    .chat-window { position: fixed; z-index: 121; right: 25px; bottom: 143px; width: min(370px, calc(100vw - 30px)); height: min(550px, calc(100vh - 175px)); display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(139,208,244,.35); border-radius: 21px; background: #0b203a; box-shadow: 0 25px 90px rgba(0,0,0,.5); opacity: 0; transform: translateY(15px) scale(.98); pointer-events: none; transition: .25s; }
+    .chat-window.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .chat-head { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: linear-gradient(110deg,#12365a,#0d2949); border-bottom: 1px solid var(--line); }
+    .chat-head strong { display: block; font-size: .9rem; }
+    .chat-head small { color: #9cb5cc; font-size: .68rem; }
+    .chat-head-actions { display: flex; gap: 7px; }
+    .chat-head button { border: 1px solid var(--line); background: rgba(255,255,255,.04); color: var(--snow); border-radius: 8px; padding: 6px 9px; cursor: pointer; font-size: .7rem; }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 11px; }
+    .message { max-width: 88%; border-radius: 14px; padding: 10px 12px; font-size: .78rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .message.bot { align-self: flex-start; background: #173858; color: #eaf4fc; border-bottom-left-radius: 4px; }
+    .message.user { align-self: flex-end; background: var(--blue); color: #071a2e; border-bottom-right-radius: 4px; }
+    .suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 14px 12px; }
+    .suggestions button { border: 1px solid rgba(77,168,218,.35); background: rgba(77,168,218,.08); color: var(--blue-light); border-radius: 99px; padding: 6px 9px; font-size: .66rem; cursor: pointer; }
+    .chat-compose { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
+    .chat-compose input { min-width: 0; padding: 10px 12px; font-size: .78rem; }
+    .chat-compose button { border: 0; border-radius: 10px; background: var(--blue); color: var(--navy); padding: 0 14px; font-weight: 800; cursor: pointer; }
+    .typing { color: #9eb7ce; font-size: .7rem; padding: 0 15px 8px; }
+    @media (max-width: 900px) {
+      .nav-links { gap: 15px; } .nav-links a { font-size: .76rem; }
+      .hero-grid { gap: 20px; } .skills-grid, .projects-grid, .achievement-grid { grid-template-columns: repeat(2,1fr); }
+      .about-grid { gap: 32px; }
+    }
+    @media (max-width: 700px) {
+      .container { width: min(100% - 34px, var(--max)); }
+      .section { padding: 82px 0; }
+      nav { height: 70px; }
+      .menu-toggle { display: block; }
+      .nav-cta { display: none; }
+      .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; padding: 18px 24px 22px; background: rgba(8,25,46,.97); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0; }
+      .nav-links.open { display: flex; }
+      .nav-links li a { display: block; padding: 12px 0; font-size: .9rem; }
+      .hero { min-height: auto; padding: 125px 0 95px; }
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: clamp(3.2rem, 15vw, 5rem); }
+      .hero-art { min-height: 370px; }
+      .profile-card { width: 245px; }
+      .chip-one { right: 3%; } .chip-two { left: 3%; }
+      .scroll-note { display: none; }
+      .about-visual { min-height: 270px; }
+      .skills-grid, .projects-grid, .achievement-grid { grid-template-columns: 1fr; }
+      .skill-card { min-height: 0; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .chat-launcher { right: 16px; bottom: 17px; }
+      .chat-window { right: 15px; bottom: 78px; height: min(560px, calc(100vh - 100px)); }
+      .back-top { right: 17px; bottom: 75px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  
+    /* Premium visual refinement */
+    :root {
+      --navy: #071629;
+      --navy-2: #0b2039;
+      --navy-3: #123252;
+      --blue: #70c5f2;
+      --blue-light: #b8e6ff;
+      --snow: #f5f9ff;
+      --muted: #a9bdd0;
+      --line: rgba(184,230,255,.15);
+      --glass: rgba(13,36,62,.72);
+      --shadow: 0 28px 90px rgba(0,0,0,.32);
+      --radius: 26px;
+    }
+    body::before {
+      background:
+        radial-gradient(ellipse at 78% 8%, rgba(83,184,239,.19), transparent 34rem),
+        radial-gradient(ellipse at 8% 42%, rgba(47,119,177,.16), transparent 32rem),
+        radial-gradient(ellipse at 90% 82%, rgba(91,159,206,.09), transparent 30rem),
+        linear-gradient(135deg, #061426 0%, #091d34 48%, #0b2947 100%);
+    }
+    ::selection { background: rgba(112,197,242,.3); color: #fff; }
+    .container { width: min(1200px, calc(100% - 56px)); }
+    .section { padding: 124px 0; }
+    .section-heading { margin-bottom: 54px; }
+    .section-heading p, .muted { color: #b3c5d7; }
+    .eyebrow { letter-spacing: .2em; font-size: .7rem; }
+    .eyebrow::before { width: 34px; box-shadow: 0 0 14px rgba(112,197,242,.65); }
+    .nav-wrap.scrolled { background: rgba(5,18,33,.78); backdrop-filter: blur(24px) saturate(150%); }
+    nav { height: 82px; }
+    .brand { font-size: 1.18rem; letter-spacing: -.055em; }
+    .nav-links { gap: 30px; }
+    .nav-links a { font-size: .8rem; letter-spacing: .01em; }
+    .nav-cta, .btn { padding: 14px 23px; letter-spacing: .01em; }
+    .nav-cta, .btn-primary { background: linear-gradient(135deg,#a8e1ff,#5db8eb); box-shadow: 0 8px 30px rgba(79,177,232,.22), inset 0 1px 0 rgba(255,255,255,.5); }
+    .btn-secondary { background: rgba(255,255,255,.045); border-color: rgba(184,230,255,.27); backdrop-filter: blur(12px); }
+    .hero { min-height: 100svh; padding-top: 145px; }
+    .hero-grid { gap: 70px; }
+    .hero h1 { letter-spacing: -.075em; line-height: .99; }
+    .hero-copy > p { max-width: 590px; color: #b8cadd; font-size: 1.04rem; line-height: 1.85; }
+    .hero-art { filter: drop-shadow(0 32px 55px rgba(0,0,0,.25)); }
+    .glass-card, .profile-card, .skill-card, .project-card, .achievement, .timeline-card, .contact-method {
+      border: 1px solid rgba(184,230,255,.14);
+      background: linear-gradient(145deg, rgba(21,53,83,.78), rgba(8,27,48,.78));
+      box-shadow: 0 18px 55px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.045);
+      backdrop-filter: blur(16px);
+    }
+    .profile-card { border-radius: 30px; }
+    .skill-card, .project-card, .achievement, .timeline-card, .contact-method { border-radius: 22px; }
+    .skill-card, .project-card, .achievement, .contact-method { transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease; }
+    .skill-card:hover, .project-card:hover, .achievement:hover, .contact-method:hover {
+      transform: translateY(-7px);
+      border-color: rgba(146,216,255,.42);
+      box-shadow: 0 25px 65px rgba(0,0,0,.25), 0 0 30px rgba(82,174,224,.07);
+    }
+    .project-cover { overflow: hidden; }
+    .project-cover::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 45%,rgba(4,17,31,.3)); pointer-events:none; }
+    .chip-one, .chip-two, .floating-chip { border: 1px solid rgba(184,230,255,.2); background: rgba(9,31,53,.82); backdrop-filter: blur(16px); box-shadow: 0 12px 32px rgba(0,0,0,.2); }
+    input, textarea { background: rgba(4,18,33,.55) !important; border: 1px solid rgba(184,230,255,.18) !important; border-radius: 14px !important; color: var(--snow) !important; }
+    input:focus, textarea:focus { border-color: rgba(112,197,242,.7) !important; box-shadow: 0 0 0 4px rgba(112,197,242,.09); }
+    .chat-window { border: 1px solid rgba(184,230,255,.2); box-shadow: 0 28px 90px rgba(0,0,0,.42); backdrop-filter: blur(22px); }
+    .chat-launcher { box-shadow: 0 12px 35px rgba(79,177,232,.28); }
+    footer { border-top: 1px solid rgba(184,230,255,.12); }
+    .back-top { border: 1px solid rgba(184,230,255,.2); backdrop-filter: blur(12px); }
+    @media (max-width: 760px) {
+      .container { width: min(100% - 36px, 620px); }
+      .section { padding: 88px 0; }
+      .hero { padding-top: 118px; }
+      .hero-grid { gap: 42px; }
+      nav { height: 70px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+
+</style>
+</head>
+<body>
+  <header class="nav-wrap" id="top">
+    <div class="container">
+      <nav aria-label="Main navigation">
+        <a class="brand" href="#home" aria-label="Nayana Shree home">NAYANA<span>.</span></a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li><li><a href="#education">Education</a></li><li><a href="#contact">Contact</a></li>
+        </ul>
+        <a class="nav-cta" href="#contact">Let's talk ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="availability"><span class="dot"></span> STUDENT · OPEN TO LEARNING</div>
+          <div class="eyebrow">Hello, I'm</div>
+          <h1><span class="line">Nayana</span><span class="line accent">Shree<span class="outline">.</span></span></h1>
+          <p class="hero-copy">A Computer Technology student exploring <strong class="accent">Generative AI</strong>, Python and the ideas that turn into useful digital experiences.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore my work <span>↗</span></a>
+            <a class="btn btn-secondary" href="#contact">Let's connect</a>
+          </div>
+          <div class="social-row">
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">GH</a>
+            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">in</a>
+            <a href="#contact" aria-label="Email">✉</a>
+          </div>
+        </div>
+        <div class="hero-art reveal" aria-label="Decorative portfolio graphic">
+          <div class="orbit"></div><div class="orbit two"></div>
+          <div class="profile-card">
+            <div class="profile-label">PORTFOLIO / 2026</div>
+            <div class="profile-name">Curious mind.<br><span class="accent">Creative learner.</span></div>
+          </div>
+          <div class="floating-chip chip-one">✦ Generative AI</div>
+          <div class="floating-chip chip-two">⌘ Python learner</div>
+        </div>
+      </div>
+      <div class="scroll-note">Scroll to explore</div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-visual reveal"><div class="about-monogram">NS</div><div class="about-stamp">LEARN · BUILD · GROW</div></div>
+        <div class="about-text reveal">
+          <div class="eyebrow">A little about me</div>
+          <h2>Learning today.<br><span class="accent">Building for tomorrow.</span></h2>
+          <p>I'm Nayana Shree, a BSc Computer Technology student at Rathinam College, specializing in Generative AI. I come from a Pure Science background and am building my foundation in computing step by step.</p>
+          <p>I'm interested in artificial intelligence, Python and practical technology projects. My current goal is to strengthen my technical skills, gain hands-on experience and grow into a confident technology professional.</p>
+          <div class="info-pills"><span class="pill">BSc Computer Technology</span><span class="pill">Generative AI</span><span class="pill">Python — learning</span><span class="pill">Tamil & English</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-heading reveal"><div class="eyebrow">What I'm learning</div><h2>Skills & <span class="accent">technologies.</span></h2><p>A growing toolkit. Skill levels are intentionally not scored; this portfolio reflects a learning journey, not invented proficiency ratings.</p></div>
+        <div class="skills-grid">
+          <article class="skill-card glass-card reveal"><div class="skill-icon">⌘</div><h3>Programming</h3><p>Learning Python fundamentals, logic, conditionals, loops, functions and problem solving.</p><div class="tech-strip"><span class="tech">Python</span><span class="tech">HTML</span><span class="tech">CSS</span></div></article>
+          <article class="skill-card glass-card reveal"><div class="skill-icon">✧</div><h3>AI & Generative AI</h3><p>Exploring AI concepts, generative AI, large language models and responsible use of AI tools.</p><div class="tech-strip"><span class="tech">AI concepts</span><span class="tech">GenAI</span><span class="tech">LLMs</span></div></article>
+          <article class="skill-card glass-card reveal"><div class="skill-icon">▧</div><h3>Data & Visualization</h3><p>Developing an understanding of data, information, analysis and visual storytelling.</p><div class="tech-strip"><span class="tech">Data concepts</span><span class="tech">Visualization</span></div></article>
+          <article class="skill-card glass-card reveal"><div class="skill-icon">⚙</div><h3>Tools & Workflow</h3><p>Building familiarity with development tools and project workflows.</p><div class="tech-strip"><span class="tech">VS Code</span><span class="tech">GitHub — exploring</span></div></article>
+          <article class="skill-card glass-card reveal"><div class="skill-icon">◎</div><h3>Communication</h3><p>Communication, curiosity, collaboration and a positive approach to learning.</p><div class="tech-strip"><span class="tech">Communication</span><span class="tech">Teamwork</span></div></article>
+          <article class="skill-card glass-card reveal"><div class="skill-icon">↗</div><h3>Personal strengths</h3><p>Creative thinking, willingness to learn, persistence and an interest in solving problems.</p><div class="tech-strip"><span class="tech">Adaptability</span><span class="tech">Creativity</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-heading reveal"><div class="eyebrow">Selected work</div><h2>Projects in <span class="accent">progress.</span></h2><p>Add your completed projects, screenshots and repository links here. The cards below are clearly marked as editable placeholders.</p></div>
+        <div class="projects-grid">
+          <article class="project-card glass-card reveal"><div class="project-cover"><span>01</span></div><div class="project-body"><h3>[Project title]</h3><p>Replace this with a short explanation of the problem, your solution and what you learned while building it.</p><div class="tech-strip"><span class="tech">[Technology]</span><span class="tech">[Technology]</span></div><div class="project-links"><span class="text-link disabled">GitHub link not added</span><span class="text-link disabled">Demo not added</span></div></div></article>
+          <article class="project-card glass-card reveal"><div class="project-cover"><span>02</span></div><div class="project-body"><h3>[Project title]</h3><p>Describe the main features, your contribution and the outcome. Add only work you have genuinely completed.</p><div class="tech-strip"><span class="tech">[Technology]</span><span class="tech">[Technology]</span></div><div class="project-links"><span class="text-link disabled">GitHub link not added</span><span class="text-link disabled">Demo not added</span></div></div></article>
+          <article class="project-card glass-card reveal"><div class="project-cover"><span>03</span></div><div class="project-body"><h3>[Project title]</h3><p>Use this card for another assignment, personal project, data visualization or AI experiment.</p><div class="tech-strip"><span class="tech">[Technology]</span><span class="tech">[Technology]</span></div><div class="project-links"><span class="text-link disabled">GitHub link not added</span><span class="text-link disabled">Demo not added</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="container">
+        <div class="section-heading reveal"><div class="eyebrow">Academic journey</div><h2>Education & <span class="accent">learning.</span></h2></div>
+        <div class="timeline">
+          <div class="timeline-item reveal"><div class="timeline-card glass-card"><div class="timeline-date">CURRENT</div><h3>BSc Computer Technology — Generative AI</h3><p>Rathinam College · Currently pursuing. Add your start year, expected graduation year and any verified academic achievements.</p></div></div>
+          <div class="timeline-item reveal"><div class="timeline-card glass-card"><div class="timeline-date">PREVIOUS EDUCATION</div><h3>Higher Secondary — Pure Science</h3><p>Vivekananda Matric Higher Secondary School · Physics, Chemistry, Botany and Zoology. Add academic years if you want them displayed.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-heading reveal"><div class="eyebrow">Practical exposure</div><h2>Experience & <span class="accent">internships.</span></h2><p>This section is ready for verified internships, volunteering or practical experience. No employment history has been assumed.</p></div>
+        <div class="timeline">
+          <div class="timeline-item reveal"><div class="timeline-card glass-card"><div class="timeline-date">ADD WHEN AVAILABLE</div><h3>[Internship / experience title]</h3><p>[Organization] · [Duration]<br>[Describe your real responsibilities, tools used and contributions.]</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="achievements">
+      <div class="container">
+        <div class="section-heading reveal"><div class="eyebrow">Milestones</div><h2>Achievements & <span class="accent">certifications.</span></h2><p>Add certificates and accomplishments after completing them. Include the issuer, date and credential link where available.</p></div>
+        <div class="achievement-grid">
+          <article class="achievement glass-card reveal"><div class="symbol">✦</div><h3>[Certification name]</h3><p>[Issuing organization] · [Completion date]</p></article>
+          <article class="achievement glass-card reveal"><div class="symbol">⌑</div><h3>[Workshop / competition]</h3><p>[Organizer] · [Participation or result]</p></article>
+          <article class="achievement glass-card reveal"><div class="symbol">↗</div><h3>[Achievement]</h3><p>[Brief description and date]</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-heading reveal"><div class="eyebrow">Get in touch</div><h2>Have an idea? Let's <span class="accent">connect.</span></h2><p>For internship opportunities, project collaboration or a friendly conversation about technology.</p></div>
+        <div class="contact-grid">
+          <div class="contact-details reveal">
+            <h3>Contact details</h3>
+            <p>Replace the placeholders with contact details you are comfortable sharing publicly.</p>
+            <div class="contact-method"><b>✉</b><span id="contactEmail">[your.email@example.com]</span></div>
+            <div class="contact-method"><b>GH</b><a id="githubLink" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub profile</a></div>
+            <div class="contact-method"><b>in</b><a id="linkedinLink" href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn profile</a></div>
+            <div class="contact-method"><b>⌖</b><span>[Your location]</span></div>
+          </div>
+          <form class="contact-form glass-card reveal" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="field"><label for="senderName">Your name</label><input id="senderName" name="name" placeholder="Name" required></div>
+              <div class="field"><label for="senderEmail">Your email</label><input id="senderEmail" name="email" type="email" placeholder="you@example.com" required></div>
+            </div>
+            <div class="field"><label for="subject">Subject</label><input id="subject" name="subject" placeholder="How can we work together?" required></div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Write your message..." required></textarea></div>
+            <button class="btn btn-primary" type="submit">Prepare email ↗</button>
+            <p class="form-note">This standalone page does not send messages to a server. After validation, it opens your email app using a mailto link. Add your real email in the JavaScript configuration.</p>
+            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Nayana Shree. Made with curiosity & code.</div>
+      <div class="footer-links"><a href="#home">Home</a><a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a></div>
+      <div>ARCTIC BLUE / PORTFOLIO</div>
+    </div>
+  </footer>
+
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+  <button class="chat-launcher" id="chatLauncher" aria-label="Open Ask My AI chat">✦ Ask My AI</button>
+  <section class="chat-window" id="chatWindow" aria-label="Ask My AI chatbot" aria-hidden="true">
+    <div class="chat-head">
+      <div><strong>✦ ASK MY AI</strong><small>Portfolio assistant · Local demo</small></div>
+      <div class="chat-head-actions"><button id="clearChat" type="button">Clear</button><button id="closeChat" type="button" aria-label="Close chat">✕</button></div>
+    </div>
+    <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+    <div class="typing" id="typing" hidden>Assistant is thinking…</div>
+    <div class="suggestions" id="suggestions">
+      <button type="button">Who is Nayana?</button><button type="button">What skills is she learning?</button>
+      <button type="button">Tell me about her education</button><button type="button">How can I contact her?</button>
+    </div>
+    <form class="chat-compose" id="chatForm"><input id="chatInput" aria-label="Ask a question" placeholder="Ask about my portfolio..." autocomplete="off"><button type="submit">Send</button></form>
+  </section>
+
+  <script>
+    // ==========================================================
+    // EDIT YOUR PERSONAL DETAILS HERE. Keep unverified details
+    // as placeholders; the chatbot reads from this same object.
+    // ==========================================================
+    const PORTFOLIO = {
+      name: "Nayana Shree",
+      title: "BSc Computer Technology Student | Generative AI",
+      location: "[Add your location]",
+      email: "[Add your email address]",
+      github: "[Add your GitHub profile URL]",
+      linkedin: "[Add your LinkedIn profile URL]",
+      introduction: "A Computer Technology student exploring Generative AI, Python and practical technology projects.",
+      about: "Nayana Shree is pursuing BSc Computer Technology with a specialization in Generative AI at Rathinam College. She previously studied Pure Science at Vivekananda Matric Higher Secondary School. She is building her foundation in computing and exploring AI and Python.",
+      skills: ["Python fundamentals (learning)", "AI and Generative AI concepts", "Data and visualization concepts", "Communication", "Creativity", "Problem solving"],
+      technologies: ["Python (learning)", "HTML", "CSS", "Generative AI concepts"],
+      projects: [
+        { title: "[Project title]", description: "[Add a genuine project description]", technologies: ["[Technology]"], github: "", demo: "" },
+        { title: "[Project title]", description: "[Add a genuine project description]", technologies: ["[Technology]"], github: "", demo: "" }
+      ],
+      education: [
+        "BSc Computer Technology — Generative AI, Rathinam College (currently pursuing)",
+        "Higher Secondary — Pure Science, Vivekananda Matric Higher Secondary School"
+      ],
+      experience: "[Add verified internship or experience details when available.]",
+      achievements: "[Add completed certifications, workshops and achievements.]"
+    };
+
+    // Navigation, sticky header and responsive menu.
+    const navWrap = document.querySelector(".nav-wrap");
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const backTop = document.getElementById("backTop");
+    menuToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+      menuToggle.textContent = open ? "✕" : "☰";
+    });
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open"); menuToggle.setAttribute("aria-expanded", "false"); menuToggle.textContent = "☰";
+    }));
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Reveal elements when they enter the viewport.
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("visible"); revealObserver.unobserve(entry.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+    // Active section highlighting and scroll-dependent controls.
+    const sectionLinks = [...document.querySelectorAll(".nav-links a")];
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          sectionLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id));
+        }
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    document.querySelectorAll("main section[id]").forEach(section => sectionObserver.observe(section));
+    window.addEventListener("scroll", () => {
+      navWrap.classList.toggle("scrolled", window.scrollY > 25);
+      backTop.classList.toggle("show", window.scrollY > 500);
+    }, { passive: true });
+    backTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+    // Contact form validation. A mail client opens; no message is stored or sent by this file.
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const status = document.getElementById("formStatus");
+      const name = document.getElementById("senderName").value.trim();
+      const email = document.getElementById("senderEmail").value.trim();
+      const subject = document.getElementById("subject").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!name || !email || !subject || !message) { status.textContent = "Please complete every field."; return; }
+      if (!validEmail) { status.textContent = "Please enter a valid email address."; return; }
+      if (!PORTFOLIO.email || PORTFOLIO.email.includes("[") || !PORTFOLIO.email.includes("@")) {
+        status.textContent = "Please add your real email address in the PORTFOLIO settings before using this form."; return;
+      }
+      const body = `From: ${name} (${email})%0D%0A%0D%0A${encodeURIComponent(message)}`;
+      window.location.href = `mailto:${PORTFOLIO.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
+      status.textContent = "Your email app should open with the message prepared.";
+    });
+
+    // ----------------------------------------------------------
+    // Local rule-based portfolio assistant.
+    // This is NOT connected to an AI model or external API.
+    // For real AI, connect a secure backend; never expose API keys
+    // in this browser-side file.
+    // ----------------------------------------------------------
+    const chatWindow = document.getElementById("chatWindow");
+    const chatLauncher = document.getElementById("chatLauncher");
+    const chatMessages = document.getElementById("chatMessages");
+    const chatInput = document.getElementById("chatInput");
+    const typing = document.getElementById("typing");
+    let chatHistoryStarted = false;
+
+    function addMessage(text, role) {
+      const bubble = document.createElement("div");
+      bubble.className = `message ${role}`;
+      bubble.textContent = text;
+      chatMessages.appendChild(bubble);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    function welcomeMessage() {
+      if (!chatHistoryStarted) {
+        addMessage(`Hey there! I'm the portfolio assistant representing ${PORTFOLIO.name}. Ask me about their skills, projects, education, experience or professional journey. I use information saved in this page, so I won't make up missing details.`, "bot");
+        chatHistoryStarted = true;
+      }
+    }
+    function openChat() {
+      chatWindow.classList.add("open"); chatWindow.setAttribute("aria-hidden", "false");
+      chatLauncher.setAttribute("aria-expanded", "true"); welcomeMessage(); chatInput.focus();
+    }
+    function closeChat() {
+      chatWindow.classList.remove("open"); chatWindow.setAttribute("aria-hidden", "true");
+      chatLauncher.setAttribute("aria-expanded", "false");
+    }
+    chatLauncher.addEventListener("click", () => chatWindow.classList.contains("open") ? closeChat() : openChat());
+    document.getElementById("closeChat").addEventListener("click", closeChat);
+    document.getElementById("clearChat").addEventListener("click", () => {
+      chatMessages.replaceChildren(); chatHistoryStarted = false; welcomeMessage();
+    });
+
+    function answerQuestion(rawQuestion) {
+      const q = rawQuestion.toLowerCase();
+      const has = (...words) => words.some(word => q.includes(word));
+      if (has("who are", "who is", "about nayana", "introduce", "your name", "her name")) {
+        return `${PORTFOLIO.name} is a ${PORTFOLIO.title}. ${PORTFOLIO.introduction}`;
+      }
+      if (has("skill", "good at", "strength", "what can")) {
+        return `Skills and areas she is developing: ${PORTFOLIO.skills.join(", ")}. These are learning areas, not claimed expert-level skills.`;
+      }
+      if (has("technology", "tech stack", "tools", "programming language", "language")) {
+        return `Technologies and topics listed: ${PORTFOLIO.technologies.join(", ")}.`;
+      }
+      if (has("project", "work", "github", "portfolio work")) {
+        const realProjects = PORTFOLIO.projects.filter(p => !p.title.includes("[") && !p.description.includes("["));
+        return realProjects.length
+          ? "Projects: " + realProjects.map(p => `${p.title}: ${p.description} Technologies: ${p.technologies.join(", ")}.`).join(" ")
+          : "Project cards are prepared, but project names and descriptions have not been added yet. Please check back after the portfolio owner adds completed projects.";
+      }
+      if (has("education", "college", "study", "school", "degree", "qualification")) {
+        return `Education: ${PORTFOLIO.education.join("; ")}.`;
+      }
+      if (has("experience", "internship", "job", "work experience")) {
+        return PORTFOLIO.experience.includes("[") ? "Internship or work experience details have not been added yet." : PORTFOLIO.experience;
+      }
+      if (has("achievement", "certificate", "certification", "award", "workshop")) {
+        return PORTFOLIO.achievements.includes("[") ? "Verified certificates and achievements have not been added yet." : PORTFOLIO.achievements;
+      }
+      if (has("contact", "email", "reach", "linkedin", "message")) {
+        return `You can use the contact section on this page. Email: ${PORTFOLIO.email}. GitHub and LinkedIn links can be added in the page settings.`;
+      }
+      if (has("location", "where are")) return `Location: ${PORTFOLIO.location}.`;
+      if (has("generative ai", "gen ai", "artificial intelligence", "ai")) {
+        return "Nayana is studying a BSc in Computer Technology with a Generative AI specialization. She is currently exploring AI concepts and building her technical foundation.";
+      }
+      if (has("hello", "hi", "hey")) return `Hello! I'm the local portfolio assistant for ${PORTFOLIO.name}. You can ask me about education, skills, projects or contact details.`;
+      return "I don't have that information in this portfolio yet. The portfolio owner can add verified details in the PORTFOLIO configuration near the start of the JavaScript section.";
+    }
+
+    function sendChatMessage(text) {
+      const question = text.trim();
+      if (!question) return;
+      addMessage(question, "user");
+      chatInput.value = "";
+      typing.hidden = false;
+      window.setTimeout(() => {
+        typing.hidden = true;
+        addMessage(answerQuestion(question), "bot");
+      }, 550);
+    }
+    document.getElementById("chatForm").addEventListener("submit", event => {
+      event.preventDefault(); sendChatMessage(chatInput.value);
+    });
+    document.getElementById("suggestions").querySelectorAll("button").forEach(button => {
+      button.addEventListener("click", () => sendChatMessage(button.textContent));
+    });
+
+    // Personal links are updated centrally; placeholders are not made clickable.
+    if (PORTFOLIO.email && !PORTFOLIO.email.includes("[")) document.getElementById("contactEmail").textContent = PORTFOLIO.email;
+    if (PORTFOLIO.github && !PORTFOLIO.github.includes("[")) document.getElementById("githubLink").href = PORTFOLIO.github;
+    if (PORTFOLIO.linkedin && !PORTFOLIO.linkedin.includes("[")) document.getElementById("linkedinLink").href = PORTFOLIO.linkedin;
+  </script>
+</body>
+</html>
